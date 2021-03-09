@@ -24,7 +24,7 @@ class TReservoir {
             $this->volume_restant = $Volume_Restant;
         }
     }
-E
+
     public function getVolumeBesoin() {
         print 'Le volume restant dans le reservoir est : ' . $this->getVolumeRestant();
         if ($this->getVolumeRestant() < ($this->capacite * 0.20)){
