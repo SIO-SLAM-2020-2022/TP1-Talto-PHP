@@ -1,6 +1,5 @@
 <?php
 
-
 class TTalto {
 
     private Array $mesReservoirs;
@@ -8,20 +7,25 @@ class TTalto {
 
 
     public function __construct(Array $mesReservoirs, Array $mesStations) {
-        $this->mesReservoirs = $mesReservoirs;
-        $this->mesStations = $mesStations;
+        if (count($mesReservoirs) <= 4) {
+            $this->mesReservoirs = $mesReservoirs;
+            $this->mesStations = $mesStations;
+        }
     }
 
-    public function getNbStation(): Int {
-        return count($this->mesStations) - 1;
-    }
+    public function livrer(String $Nom_Carburant, Int $Volume_Carburant) {
 
-    public function getStations(Int $Num_Station): TStation {
-        return $this->mesStations[$Num_Station];
-    }
+        $i = 0;
+        while (($i < count($this->mesReservoirs)) && ($this->mesReservoirs[$i]->getCarburant() != $Nom_Carburant) ){
+            $i++;
+        }
+        if ($i < count($this->mesReservoirs)){
+            $this->mesReservoirs[$i]->changerVolume(- $Volume_Carburant);
+        } else {
+            print "Carburant non trouvé/non existant !";
+        }
 
-    public function livrer(String $Nom_Carburant, Int $Volume_Carburant): void {
-
+        /*
         foreach ($this->mesReservoirs as $key) {
             foreach ($key as $k => $value) {
                 if ($value->getCarburant() == $Nom_Carburant) {
@@ -35,10 +39,26 @@ class TTalto {
 
                 }
             }
-        }
+        }*/
     }
 
-    public function reste(String $Nom_Carburant) {
-        return $this->mesReservoirs[$Nom_Carburant];
+    public function reste(String $Nom_Carburant): Int{
+
+        $i = 0;
+        while (($i < count($this->mesReservoirs)) && ($this->mesReservoirs[$i]->getCarburant() != $Nom_Carburant) ){
+            $i++;
+        }
+        if ($i < count($this->mesReservoirs)){
+            return $this->mesReservoirs[$i]->getVolumeRestant();
+        } else {
+            print "Carburant non trouvé";
+            return 0;
+        }
+
+
     }
+
+
+    public function getNbStation(): Int { return count($this->mesStations); }
+    public function getStations(Int $Num_Station): TStation { return $this->mesStations[$Num_Station]; }
 }

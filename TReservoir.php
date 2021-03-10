@@ -6,12 +6,11 @@ class TReservoir {
     /**
      * @var String $carburant - nom du carburant
      * @var Int $capacite - capacite de stockage du carburant
-     * @var $volume_restant - le volume de carburant restant
+     * @var Int $volume_restant - le volume de carburant restant
      */
     private String $carburant;
     private Int $capacite;
     private Int $volume_restant;
-
 
 
     public function __construct(String $Nom_Carburant, Int $Capacite_Reservoir, Int $Volume_Restant) {
@@ -25,34 +24,30 @@ class TReservoir {
         }
     }
 
-    public function getVolumeBesoin() {
+    public function getVolumeBesoin(): Int{
         print 'Le volume restant dans le reservoir est : ' . $this->getVolumeRestant();
         if ($this->getVolumeRestant() < ($this->capacite * 0.20)){
-            $this->changerVolume($this->capacite);
+            // $this->changerVolume($this->capacite - $this->getVolumeRestant());
+            return $this->capacite - $this->getVolumeRestant();
         } else {
             print "\nPas besoin de réapprovisionner !";
+            return 0;
         }
     }
 
 
     public function changerVolume(Int $volume){
-        if ($this->volume_restant += $volume > 0 && $this->volume_restant += $volume <= $this->capacite){
+        if ($this->volume_restant += $volume >= 0 && $this->volume_restant += $volume <= $this->capacite){
             $this->volume_restant += $volume;
         } else {
-            print "Volume : " . $volume . " :: supérieur ou inférieure par rapport la capacité : " . $this->capacite;
+            print "Volume : " . $volume . " :: supérieur ou inférieure par rapport à la capacité : " . $this->capacite;
         }
     }
 
-
-    public function getCarburant(): String {
-        return $this->carburant;
-    }
-
-    public function getVolumeRestant(): Int {
-        return $this->volume_restant;
-    }
-
-    public function getCapacite(): Int {
-        return $this->capacite;
-    }
+    /**
+     * Getters
+     */
+    public function getCarburant(): String { return $this->carburant; }
+    public function getVolumeRestant(): Int { return $this->volume_restant; }
+    public function getCapacite(): Int { return $this->capacite; }
 }

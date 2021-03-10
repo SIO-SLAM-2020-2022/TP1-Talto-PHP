@@ -27,15 +27,11 @@ do {
 } while ($reponse == "oui");
 
 
-/*
- * Tableaux regroupant chaque réservoirs de chaque stations
 $tab_reservoir_nord = [$reservoir_1, $reservoir_2, $reservoir_4, $reservoir_3];
 $tab_reservoir_sud = [$reservoir_2, $reservoir_1, $reservoir_3];
 $tab_reservoir_ouest = [$reservoir_1, $reservoir_2, $reservoir_3, $reservoir_4];
 $tab_reservoir_est = [$reservoir_1, $reservoir_2];
 
-/**
- * Instanciation des stations
 $station_nord = new TStation('Station Nord', $tab_reservoir_nord, 4);
 
 $station_sud = new TStation('Station Sud', $tab_reservoir_sud, 3);
